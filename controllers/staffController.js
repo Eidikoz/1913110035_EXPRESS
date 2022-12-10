@@ -8,9 +8,9 @@ const staff = async (req, res, next) => {
 
 const insert = async (req, res, next) => {
     const { name,salary,job } = req.body;
-    let staffinsert = staffs({name: name,salary: salary,job: job});
-    const result = await staffinsert.save();
-    return res.status(200).json({message:'Done: '+(result!=null)});
+    let staffInsert = staffs({name: name,salary: salary,job: job});
+    const result = await staffInsert.save();
+    return res.status(200).json({message:'Created: '+(result!=null)});
 };
 
 const show = async (req,res,next) => {
@@ -18,20 +18,41 @@ const show = async (req,res,next) => {
         const {id} = req.params;
         const staffResult = await staffs.findOne({_id: id});
         if(!staffResult){
-            throw new Error('No staff found')
+            throw new Error('Staff not found')
         }
         return res.status(200).json({ data: staffResult });
-    }catch(error){
-        res.status(404).end("Error: "+error.message)
+    }catch(e){
+        res.status(404).end("Error: "+e.message)
     }
 
-}
+};
 
 const destroy = async (req,res,next) => {
-    const { id } = req.params
+    const {id} = req.params
     const staffResult = await staffs.deleteOne({_id:id});
 
-    return res.status(200).json({message:"Done: ",data: staffResult})
-}
+    return res.status(200).json({message:"Deleted",data: staffResult})
+};
 
-module.exports = { staff: staff, insert: insert, show: show, destroy: destroy};
+const update = async (req,res,next) => {
+    try{
+        const {id} = req.params;
+        const {name,salary,job} = req.body;
+        console.log(req.body);
+        const staffResult = await staffs.findByIdAndUpdate(id,{
+            name: name,
+            salary: salary,
+            job: job
+        });
+        if(!staffResult){
+            throw new Error('Staff not found')
+        }
+        const result = await staffResult.save();
+
+        return res.status(200).json({ message:"Updated: "+(result!=null) });
+    }catch(e){
+        res.status(404).end("Error: "+e.message)
+    }
+};
+
+module.exports = { staff: staff, insert: insert, show: show, destroy: destroy, update: update};
