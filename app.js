@@ -10,7 +10,10 @@ const companiesRouter = require("./routes/company");
 
 var app = express();
 
-mongoose.connect('mongodb+srv://pongpanot:1234@1913110035-pongpanot.aviecob.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://pongpanot:1234@1913110035-pongpanot.aviecob.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
 app.use(logger('dev'));
 app.use(express.json());
