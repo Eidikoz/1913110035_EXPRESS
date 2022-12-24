@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { shop } = require("../controllers/shopController");
+const { shop , menu } = require("../controllers/shopController");
 
 router.get("/", shop);
+router.get("/menu", menu);
 
 module.exports = router;
