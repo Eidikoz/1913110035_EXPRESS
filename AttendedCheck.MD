@@ -1,1 +1,1 @@
-Pongpanot (Stang): Chapter 5 Advance Mongoose
+Pongpanot (Stang): Chapter 6 - Attendance
