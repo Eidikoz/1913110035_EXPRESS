@@ -13,7 +13,7 @@ const config = require('./config')
 
 var app = express();
 
-mongoose.connect(config.MONGODBURI, { 
+mongoose.connect(config.MONGODBURL, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 })
