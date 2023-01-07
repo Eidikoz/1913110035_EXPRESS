@@ -9,7 +9,7 @@ const usersRouter = require("./routes/users");
 const companiesRouter = require("./routes/company");
 const staffsRouter = require("./routes/staff");
 const shopsRouter = require("./routes/shop");
-const config = require('./config')
+const config = require('./config');
 
 var app = express();
 
@@ -19,7 +19,9 @@ mongoose.connect(config.MONGODBURL, {
 })
 
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({
+    limit:'50mb'
+}));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

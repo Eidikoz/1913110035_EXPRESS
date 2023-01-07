@@ -6,6 +6,10 @@ const staffsSchema = new Schema({
     salary: { type: Number },
     job: {type: String,require: true,trim: true},
     created: { type: Date, default: Date.now},
+    photo: {
+        type: String,
+        default: 'nopic.png'
+    }
 });
 
 const staffs = mongoose.model("staffs",staffsSchema,"staffs");
