@@ -9,13 +9,14 @@ const usersRouter = require("./routes/users");
 const companiesRouter = require("./routes/company");
 const staffsRouter = require("./routes/staff");
 const shopsRouter = require("./routes/shop");
+const config = require('./config')
 
 var app = express();
 
-mongoose.connect('mongodb+srv://pongpanot:1234@1913110035-pongpanot.aviecob.mongodb.net/restfulapi?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(config.MONGODBURI, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+})
 
 app.use(logger('dev'));
 app.use(express.json());
